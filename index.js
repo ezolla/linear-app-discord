@@ -16,6 +16,7 @@ const port = process.env.PORT || 3000;
 // Parse the request body
 app.use(bodyParser.json());
 
+getID("https://linear.app/projecthook/issue/SNE-34/new-format");
 // Receive HTTP POST requests
 app.post("/linear", (req, res) => {
   const payload = req.body;
@@ -57,12 +58,12 @@ app.post("/linear", (req, res) => {
     const msg = new Discord.MessageBuilder()
       .setName("Linear")
       .setColor("#606CCC")
-      .setAuthor("New Issue Created")
-      .setTitle(payload.data.title)
+      .setAuthor("Issue Created")
+      .setTitle(`${getID(payload.url)}: ${payload.data.title}`)
       .setDescription(payload.data.description)
       .setURL(payload.url)
       .addField("ID", payload.data.number, true)
-      .addField("Priority", priorityValue(payload.data.priority), true)
+      .addField("Priority", getPriorityValue(payload.data.priority), true)
       .addField("Points", payload.data.estimate, true)
       .setTime()
       .setFooter(
@@ -89,8 +90,8 @@ app.listen(port, () =>
   console.log(`My webhook consumer listening on port ${port}!`)
 );
 
-// Job to send webhooks
-function priorityValue(priority) {
+// Gets translation of priority value
+function getPriorityValue(priority) {
   switch (priority) {
     case 0:
       return "None";
@@ -103,6 +104,13 @@ function priorityValue(priority) {
     case 4:
       return "Low";
   }
+}
+
+// Gets task ID from url
+function getID(link) {
+  var id = link.split("/");
+
+  return id[5];
 }
 
 // Event I want handled
