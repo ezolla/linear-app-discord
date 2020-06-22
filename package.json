@@ -1,0 +1,32 @@
+{
+  "name": "linear-app-discord",
+  "version": "1.0.0",
+  "description": "Listen for Linear App events and updates with Discord.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezolla/linear-app-discord.git"
+  },
+  "keywords": [
+    "Linear",
+    "LinearApp",
+    "Discord",
+    "Webhooks",
+    "Hooks",
+    "Issue Tracking",
+    "Monitoring"
+  ],
+  "author": "Ethan Zoller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ezolla/linear-app-discord/issues"
+  },
+  "homepage": "https://github.com/ezolla/linear-app-discord#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
