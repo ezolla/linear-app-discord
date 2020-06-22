@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Discord = require("webhook-discord");
 
-const webhook = new webhook.Webhook(
+const webhook = new Discord.Webhook(
   "https://discordapp.com/api/webhooks/724483491449798716/1RRbFpcgUE72FhJNw_TSMO7GFDSKnIusk8NS1B7C-GDAOFD2dFQoCq-fPZL-5eyoGZhY"
 );
 
