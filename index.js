@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Discord = require("webhook-discord");
 
-const Discord = new webhook.Webhook(
+const webhook = new webhook.Webhook(
   "https://discordapp.com/api/webhooks/724483491449798716/1RRbFpcgUE72FhJNw_TSMO7GFDSKnIusk8NS1B7C-GDAOFD2dFQoCq-fPZL-5eyoGZhY"
 );
 
@@ -36,7 +36,7 @@ app.post("/linear", (req, res) => {
 
   function newIssue(payload) {
     // Defining Discord embed
-    const msg = new webhook.MessageBuilder()
+    const msg = new Discord.MessageBuilder()
       .setName("Linear")
       .setColor("#606CCC")
       .setTitle("New Issue Created")
@@ -51,7 +51,7 @@ app.post("/linear", (req, res) => {
       );
 
     // Sending Discord embed
-    Discord.send(msg);
+    webhook.send(msg);
   }
 
   // Finally, respond with a HTTP 200 to signal all good
