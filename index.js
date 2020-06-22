@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 // Receive HTTP POST requests
 app.post("/linear", (req, res) => {
   const payload = req.body;
+  console.log(req.body);
   const { action, data, type, createdAt } = payload;
 
   // Logging data to see how hook formatting should be handled
