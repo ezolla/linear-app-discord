@@ -2,11 +2,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Discord = require("webhook-discord");
-const util = require("util");
+const config = require("./config.json");
 
-const webhook = new Discord.Webhook(
-  "https://discordapp.com/api/webhooks/724483491449798716/1RRbFpcgUE72FhJNw_TSMO7GFDSKnIusk8NS1B7C-GDAOFD2dFQoCq-fPZL-5eyoGZhY"
-);
+const webhook = new Discord.Webhook(config.Webhook);
 
 // Initializing express app
 const app = express();
@@ -20,41 +18,19 @@ app.use(bodyParser.json());
 // Receive HTTP POST requests
 app.post("/linear", (req, res) => {
   const payload = req.body;
-  // console.log(`Labels 1: ${req.body.data.labels[0]}`);
-  const { action, data, type, createdAt } = payload;
 
-  // Logging data to see how hook formatting should be handled
-  console.log(payload);
-  console.log(`Payload Action: ${action}`);
-  console.log(`Payload Data: ${data}`);
-  console.log(`Payload Type: ${type}`);
-  console.log(`Payload Created Time: ${createdAt}`);
-  console.log(`Labels: ${payload.data.labels}`);
-  console.log(`Labels: ${util.inspect(payload.data.labels[0])}`);
-
-  console.log("---");
-  console.log(payload.url);
-  console.log(payload.data.title);
-  console.log(payload.data.number);
-  console.log(payload.data.priority);
-  console.log(payload.data.estimate);
-  console.log(action);
-  console.log(type);
-
-  if (action == "create" && type == "Issue") {
+  // Checking for new issue event
+  if (payload.action == "create" && payload.type == "Issue") {
     console.log("New Issue");
     newIssue(payload);
-  } else if (action == "update" && type == "Issue") {
-    console.log("Issue Update");
-    updateIssue(payload);
   }
 
-  // Finally, respond with a HTTP 200 to signal all good
+  // Responding with 200
   res.sendStatus(200);
 });
 
 app.listen(port, () =>
-  console.log(`My webhook consumer listening on port ${port}!`)
+  console.log(`Webhook consumer listening on port ${port}!`)
 );
 
 function newIssue(payload) {
@@ -85,35 +61,10 @@ function newIssue(payload) {
     });
 }
 
-function updateIssue(payload) {
-  // Defining Discord embed
-  const msg = new Discord.MessageBuilder()
-    .setName("Linear")
-    .setColor("#606CCC")
-    .setAuthor(`Issue Updated [${getID(payload.url)}]`)
-    .setTitle(payload.data.title)
-    .setURL(payload.url)
-    .addField("Priority", getPriorityValue(payload.data.priority), true)
-    .addField("Points", payload.data.estimate, true)
-    .addField("Labels", prettifyLabels(payload.data.labels), false)
-    .setTime()
-    .setFooter(
-      "Linear App",
-      "https://pbs.twimg.com/profile_images/1121592030449168385/MF6whgy1_400x400.png"
-    );
-
-  // Sending Discord embed
-  webhook
-    .send(msg)
-    .then(() => {
-      console.log("Webhook Sent");
-    })
-    .catch((err) => {
-      console.log(`Error sending webhook: ${err}`);
-    });
-}
-
-// Gets translation of priority value
+/**
+ * Get the Priority Value translated
+ * @param {int} priority number for priority
+ */
 function getPriorityValue(priority) {
   switch (priority) {
     case 0:
@@ -129,13 +80,20 @@ function getPriorityValue(priority) {
   }
 }
 
-// Gets task ID from url
+/**
+ * Get the task ID from url
+ * @param {string} link task url
+ */
 function getID(link) {
   var id = link.split("/");
 
   return id[5];
 }
 
+/**
+ * Formats and prettifies label(s)
+ * @param {Array} labels connected labels
+ */
 function prettifyLabels(labels) {
   let payload = "";
 
@@ -147,9 +105,3 @@ function prettifyLabels(labels) {
 
   return payload;
 }
-
-// Event I want handled
-// - Create issue x
-// - Edited issue
-// - Create project
-// - Edit project
