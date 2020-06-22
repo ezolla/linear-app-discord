@@ -119,7 +119,7 @@ function prettifyLabels(labels) {
 
 // Event I want handled
 // - Archive issue
-// - Create issue
+// - Create issue x
 // - Edited issue
 // - Create project
 // - Edit project
