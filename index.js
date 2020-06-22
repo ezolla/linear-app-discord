@@ -59,7 +59,7 @@ app.post("/linear", (req, res) => {
       .setColor("#606CCC")
       .setTitle("New Issue Created")
       .setURL(payload.url)
-      .setTime(payload.createdAt)
+      // .setTime(payload.createdAt)
       .addField("Title", payload.data.title, true)
       .addField("Number", payload.data.number, true)
       .addField("Priority", payload.data.priority, true)
