@@ -30,9 +30,7 @@ app.post("/linear", (req, res) => {
   console.log(`Payload Type: ${type}`);
   console.log(`Payload Created Time: ${createdAt}`);
   console.log(`Labels: ${payload.data.labels}`);
-  console.log(
-    `Labels: ${(util.inspect(payload.data.labels[0]), false, null, true)}`
-  );
+  console.log(`Labels: ${util.inspect(payload.data.labels[0])}`);
 
   console.log("---");
   console.log(payload.url);
