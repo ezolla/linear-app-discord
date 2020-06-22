@@ -19,8 +19,6 @@ app.use(bodyParser.json());
 // Receive HTTP POST requests
 app.post("/linear", (req, res) => {
   const payload = req.body;
-  console.log(req.body);
-  console.log(`Labels: ${req.body.data.labels}`);
   // console.log(`Labels 1: ${req.body.data.labels[0]}`);
   const { action, data, type, createdAt } = payload;
 
@@ -30,6 +28,8 @@ app.post("/linear", (req, res) => {
   console.log(`Payload Data: ${data}`);
   console.log(`Payload Type: ${type}`);
   console.log(`Payload Created Time: ${createdAt}`);
+  console.log(`Labels: ${req.body.data.labels}`);
+  console.log(`Labels: ${req.body.data.labels[0]}`);
 
   console.log("---");
   console.log(payload.url);
@@ -52,7 +52,6 @@ app.post("/linear", (req, res) => {
       .setColor("#606CCC")
       .setAuthor(`Issue Created [${getID(payload.url)}]`)
       .setTitle(payload.data.title)
-      .setDescription(prettifyDescription(payload.data.description))
       .setURL(payload.url)
       .addField("ID", payload.data.number, true)
       .addField("Priority", getPriorityValue(payload.data.priority), true)
@@ -105,10 +104,6 @@ function getID(link) {
   return id[5];
 }
 
-// Prettifies description
-function prettifyDescription(description) {
-  return `${description.substring(0, 200)}...`;
-}
 // Event I want handled
 // - Archive issue
 // - Create issue
