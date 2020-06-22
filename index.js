@@ -56,6 +56,7 @@ app.post("/linear", (req, res) => {
       .setURL(payload.url)
       .addField("Priority", getPriorityValue(payload.data.priority), true)
       .addField("Points", payload.data.estimate, true)
+      .addField("Labels", prettifyLabels(payload.data.labels), true)
       .setTime()
       .setFooter(
         "Linear App",
@@ -102,6 +103,18 @@ function getID(link) {
   var id = link.split("/");
 
   return id[5];
+}
+
+function prettifyLabels(labels) {
+  let payload = "";
+
+  labels.forEach((label) => {
+    payload += `${label.name},`;
+  });
+
+  payload = payload.substring(0, payload.length - 1);
+
+  return payload;
 }
 
 // Event I want handled
