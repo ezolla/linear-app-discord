@@ -70,7 +70,14 @@ app.post("/linear", (req, res) => {
       );
 
     // Sending Discord embed
-    webhook.send(msg);
+    webhook
+      .send(msg)
+      .then(() => {
+        console.log("Webhook Sent");
+      })
+      .catch((err) => {
+        console.log(`Error sending webhook: ${err}`);
+      });
   }
 
   // Finally, respond with a HTTP 200 to signal all good
