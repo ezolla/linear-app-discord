@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Discord = require("webhook-discord");
+const util = require("util");
 
 const webhook = new Discord.Webhook(
   "https://discordapp.com/api/webhooks/724483491449798716/1RRbFpcgUE72FhJNw_TSMO7GFDSKnIusk8NS1B7C-GDAOFD2dFQoCq-fPZL-5eyoGZhY"
@@ -29,7 +30,9 @@ app.post("/linear", (req, res) => {
   console.log(`Payload Type: ${type}`);
   console.log(`Payload Created Time: ${createdAt}`);
   console.log(`Labels: ${payload.data.labels}`);
-  console.log(`Labels: ${payload.data.labels[0]}`);
+  console.log(
+    `Labels: ${(util.inspect(payload.data.labels[0]), false, null, true)}`
+  );
 
   console.log("---");
   console.log(payload.url);
@@ -53,7 +56,6 @@ app.post("/linear", (req, res) => {
       .setAuthor(`Issue Created [${getID(payload.url)}]`)
       .setTitle(payload.data.title)
       .setURL(payload.url)
-      .addField("ID", payload.data.number, true)
       .addField("Priority", getPriorityValue(payload.data.priority), true)
       .addField("Points", payload.data.estimate, true)
       .setTime()
