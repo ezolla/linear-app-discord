@@ -31,10 +31,18 @@ app.post("/linear", (req, res) => {
   console.log(`Payload Created Time: ${createdAt}`);
 
   if (action == "create" && type == "issue") {
+    console.log("Identified new issue");
     newIssue(payload);
   }
 
   function newIssue(payload) {
+    console.log("---");
+    console.log(payload.url);
+    console.log(payload.data.title);
+    console.log(payload.data.number);
+    console.log(payload.data.priority);
+    console.log(payload.data.estimate);
+
     // Defining Discord embed
     const msg = new Discord.MessageBuilder()
       .setName("Linear")
