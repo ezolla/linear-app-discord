@@ -39,7 +39,7 @@ app.post("/linear", (req, res) => {
   console.log(action);
   console.log(type);
 
-  if (action == "create" && type == "issue") {
+  if (action == "create" && type == "Issue") {
     console.log("Identified new issue");
     newIssue(payload);
   }
