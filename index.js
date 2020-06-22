@@ -85,7 +85,7 @@ function newIssue(payload) {
     });
 }
 
-function updatePayload(payload) {
+function updateIssue(payload) {
   // Defining Discord embed
   const msg = new Discord.MessageBuilder()
     .setName("Linear")
