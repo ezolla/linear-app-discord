@@ -16,7 +16,6 @@ const port = process.env.PORT || 3000;
 // Parse the request body
 app.use(bodyParser.json());
 
-getID("https://linear.app/projecthook/issue/SNE-34/new-format");
 // Receive HTTP POST requests
 app.post("/linear", (req, res) => {
   const payload = req.body;
@@ -47,20 +46,13 @@ app.post("/linear", (req, res) => {
   }
 
   function newIssue(payload) {
-    console.log("---");
-    console.log(payload.url);
-    console.log(payload.data.title);
-    console.log(payload.data.number);
-    console.log(payload.data.priority);
-    console.log(payload.data.estimate);
-
     // Defining Discord embed
     const msg = new Discord.MessageBuilder()
       .setName("Linear")
       .setColor("#606CCC")
       .setAuthor(`Issue Created [${getID(payload.url)}]`)
       .setTitle(payload.data.title)
-      .setDescription(payload.data.description)
+      .setDescription(prettifyDescription(payload.data.description))
       .setURL(payload.url)
       .addField("ID", payload.data.number, true)
       .addField("Priority", getPriorityValue(payload.data.priority), true)
@@ -113,6 +105,10 @@ function getID(link) {
   return id[5];
 }
 
+// Prettifies description
+function prettifyDescription(description) {
+  return `${description.substring(0, 200)}...`;
+}
 // Event I want handled
 // - Archive issue
 // - Create issue
