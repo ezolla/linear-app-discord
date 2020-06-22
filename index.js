@@ -42,36 +42,11 @@ app.post("/linear", (req, res) => {
   console.log(type);
 
   if (action == "create" && type == "Issue") {
-    console.log("Identified new issue");
+    console.log("New Issue");
     newIssue(payload);
-  }
-
-  function newIssue(payload) {
-    // Defining Discord embed
-    const msg = new Discord.MessageBuilder()
-      .setName("Linear")
-      .setColor("#606CCC")
-      .setAuthor(`Issue Created [${getID(payload.url)}]`)
-      .setTitle(payload.data.title)
-      .setURL(payload.url)
-      .addField("Priority", getPriorityValue(payload.data.priority), true)
-      .addField("Points", payload.data.estimate, true)
-      .addField("Labels", prettifyLabels(payload.data.labels), false)
-      .setTime()
-      .setFooter(
-        "Linear App",
-        "https://pbs.twimg.com/profile_images/1121592030449168385/MF6whgy1_400x400.png"
-      );
-
-    // Sending Discord embed
-    webhook
-      .send(msg)
-      .then(() => {
-        console.log("Webhook Sent");
-      })
-      .catch((err) => {
-        console.log(`Error sending webhook: ${err}`);
-      });
+  } else if (action == "update" && type == "Issue") {
+    console.log("Issue Update");
+    updateIssue(payload);
   }
 
   // Finally, respond with a HTTP 200 to signal all good
@@ -81,6 +56,62 @@ app.post("/linear", (req, res) => {
 app.listen(port, () =>
   console.log(`My webhook consumer listening on port ${port}!`)
 );
+
+function newIssue(payload) {
+  // Defining Discord embed
+  const msg = new Discord.MessageBuilder()
+    .setName("Linear")
+    .setColor("#606CCC")
+    .setAuthor(`Issue Created [${getID(payload.url)}]`)
+    .setTitle(payload.data.title)
+    .setURL(payload.url)
+    .addField("Priority", getPriorityValue(payload.data.priority), true)
+    .addField("Points", payload.data.estimate, true)
+    .addField("Labels", prettifyLabels(payload.data.labels), false)
+    .setTime()
+    .setFooter(
+      "Linear App",
+      "https://pbs.twimg.com/profile_images/1121592030449168385/MF6whgy1_400x400.png"
+    );
+
+  // Sending Discord embed
+  webhook
+    .send(msg)
+    .then(() => {
+      console.log("Webhook Sent");
+    })
+    .catch((err) => {
+      console.log(`Error sending webhook: ${err}`);
+    });
+}
+
+function updatePayload(payload) {
+  // Defining Discord embed
+  const msg = new Discord.MessageBuilder()
+    .setName("Linear")
+    .setColor("#606CCC")
+    .setAuthor(`Issue Updated [${getID(payload.url)}]`)
+    .setTitle(payload.data.title)
+    .setURL(payload.url)
+    .addField("Priority", getPriorityValue(payload.data.priority), true)
+    .addField("Points", payload.data.estimate, true)
+    .addField("Labels", prettifyLabels(payload.data.labels), false)
+    .setTime()
+    .setFooter(
+      "Linear App",
+      "https://pbs.twimg.com/profile_images/1121592030449168385/MF6whgy1_400x400.png"
+    );
+
+  // Sending Discord embed
+  webhook
+    .send(msg)
+    .then(() => {
+      console.log("Webhook Sent");
+    })
+    .catch((err) => {
+      console.log(`Error sending webhook: ${err}`);
+    });
+}
 
 // Gets translation of priority value
 function getPriorityValue(priority) {
@@ -118,9 +149,7 @@ function prettifyLabels(labels) {
 }
 
 // Event I want handled
-// - Archive issue
 // - Create issue x
 // - Edited issue
 // - Create project
 // - Edit project
-// - Archive project
