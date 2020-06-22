@@ -30,6 +30,15 @@ app.post("/linear", (req, res) => {
   console.log(`Payload Type: ${type}`);
   console.log(`Payload Created Time: ${createdAt}`);
 
+  console.log("---");
+  console.log(payload.url);
+  console.log(payload.data.title);
+  console.log(payload.data.number);
+  console.log(payload.data.priority);
+  console.log(payload.data.estimate);
+  console.log(action);
+  console.log(type);
+
   if (action == "create" && type == "issue") {
     console.log("Identified new issue");
     newIssue(payload);
