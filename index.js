@@ -57,14 +57,14 @@ app.post("/linear", (req, res) => {
     const msg = new Discord.MessageBuilder()
       .setName("Linear")
       .setColor("#606CCC")
-      .setTitle("New Issue Created")
-      .setDescription("There has been a new issue created.")
+      .setAuthor("New Issue Created")
+      .setTitle(payload.data.title)
+      .setDescription(payload.data.description)
       .setURL(payload.url)
-      .setTime()
-      .addField("Title", payload.data.title, true)
       .addField("ID", payload.data.number, true)
-      .addField("Priority", priorityValue(payload.data.priority), false)
+      .addField("Priority", priorityValue(payload.data.priority), true)
       .addField("Points", payload.data.estimate, true)
+      .setTime()
       .setFooter(
         "Linear App",
         "https://pbs.twimg.com/profile_images/1121592030449168385/MF6whgy1_400x400.png"
