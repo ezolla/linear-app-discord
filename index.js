@@ -58,11 +58,12 @@ app.post("/linear", (req, res) => {
       .setName("Linear")
       .setColor("#606CCC")
       .setTitle("New Issue Created")
+      .setDescription("There has been a new issue created.")
       .setURL(payload.url)
       .setTime()
       .addField("Title", payload.data.title, true)
       .addField("ID", payload.data.number, true)
-      .addField("Priority", payload.data.priority, false)
+      .addField("Priority", priorityValue(payload.data.priority), false)
       .addField("Points", payload.data.estimate, true)
       .setFooter(
         "Linear App",
@@ -89,7 +90,20 @@ app.listen(port, () =>
 );
 
 // Job to send webhooks
-function sendWebhook(msg) {}
+function priorityValue(priority) {
+  switch (priority) {
+    case 0:
+      return "None";
+    case 1:
+      return "Urgent";
+    case 2:
+      return "High";
+    case 3:
+      return "Medium";
+    case 4:
+      return "Low";
+  }
+}
 
 // Event I want handled
 // - Archive issue
