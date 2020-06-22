@@ -112,7 +112,7 @@ function prettifyLabels(labels) {
     payload += `${label.name}, `;
   });
 
-  payload = payload.substring(0, payload.length - 1);
+  payload = payload.substring(0, payload.length - 2);
 
   return payload;
 }
