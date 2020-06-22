@@ -56,7 +56,7 @@ app.post("/linear", (req, res) => {
       .setURL(payload.url)
       .addField("Priority", getPriorityValue(payload.data.priority), true)
       .addField("Points", payload.data.estimate, true)
-      .addField("Labels", prettifyLabels(payload.data.labels), true)
+      .addField("Labels", prettifyLabels(payload.data.labels), false)
       .setTime()
       .setFooter(
         "Linear App",
@@ -109,7 +109,7 @@ function prettifyLabels(labels) {
   let payload = "";
 
   labels.forEach((label) => {
-    payload += `${label.name},`;
+    payload += `${label.name}, `;
   });
 
   payload = payload.substring(0, payload.length - 1);
