@@ -28,8 +28,8 @@ app.post("/linear", (req, res) => {
   console.log(`Payload Data: ${data}`);
   console.log(`Payload Type: ${type}`);
   console.log(`Payload Created Time: ${createdAt}`);
-  console.log(`Labels: ${req.body.data.labels}`);
-  console.log(`Labels: ${req.body.data.labels[0]}`);
+  console.log(`Labels: ${payload.data.labels}`);
+  console.log(`Labels: ${payload.data.labels[0]}`);
 
   console.log("---");
   console.log(payload.url);
