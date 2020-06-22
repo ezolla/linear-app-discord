@@ -21,6 +21,7 @@ app.post("/linear", (req, res) => {
   const payload = req.body;
   console.log(req.body);
   console.log(`Labels: ${req.body.data.labels}`);
+  console.log(`Labels 1: ${req.body.data.labels[0]}`);
   const { action, data, type, createdAt } = payload;
 
   // Logging data to see how hook formatting should be handled
@@ -58,10 +59,11 @@ app.post("/linear", (req, res) => {
       .setColor("#606CCC")
       .setTitle("New Issue Created")
       .setURL(payload.url)
+      .setTime(payload.createdAt)
       .addField("Title", payload.data.title, true)
-      .addField("Number", payload.data.number, false)
+      .addField("Number", payload.data.number, true)
       .addField("Priority", payload.data.priority, true)
-      .addField("Points", payload.data.estimate, false)
+      .addField("Points", payload.data.estimate, true)
       .setFooter(
         "Linear App",
         "https://pbs.twimg.com/profile_images/1121592030449168385/MF6whgy1_400x400.png"
