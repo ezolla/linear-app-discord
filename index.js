@@ -21,7 +21,7 @@ app.post("/linear", (req, res) => {
   const payload = req.body;
   console.log(req.body);
   console.log(`Labels: ${req.body.data.labels}`);
-  console.log(`Labels 1: ${req.body.data.labels[0]}`);
+  // console.log(`Labels 1: ${req.body.data.labels[0]}`);
   const { action, data, type, createdAt } = payload;
 
   // Logging data to see how hook formatting should be handled
