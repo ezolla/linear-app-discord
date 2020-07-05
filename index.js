@@ -37,7 +37,7 @@ function newIssue(payload) {
   // Defining Discord embed
   const msg = new Discord.MessageBuilder()
     .setName("Linear")
-    .setColor("#606CCC")
+    .setColor("#4752B2")
     .setAuthor(`Issue Created [${getID(payload.url)}]`)
     .setTitle(payload.data.title)
     .setURL(payload.url)
