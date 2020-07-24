@@ -39,7 +39,7 @@ function newIssue(payload: any) {
   // TEMP: logging to learn types
   console.log(`Payload Type: ${typeof payload}`);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _reject) => {
     request({
       url: process.env.WEBHOOK,
       method: "POST",
