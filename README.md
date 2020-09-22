@@ -20,15 +20,15 @@ You will need to put your own [Discord webhook](https://support.discord.com/hc/e
 
 ## Built With
 
-- [Nodejs](https://nodejs.org/en/) - Javascript runtime environment
+- [Node.js](https://nodejs.org/en/) - JavaScript runtime environment
 - [NPM](https://www.npmjs.com/) - Node package manager
 - [Express](https://www.npmjs.com/package/express) - Web framework
-- [Body Parser](https://www.npmjs.com/package/body-parser) - Parsing middleware
 - [Webhook Discord](https://www.npmjs.com/package/webhook-discord) - Easy hook sending
 
 ## Author
 
 - **Ethan Zoller** - [Site](https://www.ethanzoller.com/) | [Twitter](https://twitter.com/ethanzolla)
+- **Alistair Smith** - [Site](https://alistair.cloud/) | [Twitter](https://twitter.com/aabbccsmith)
 
 ## License
 
