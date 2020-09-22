@@ -1,8 +1,8 @@
 {
   "name": "linear-app-discord",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Listen for Linear App events and updates with Discord.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc"
@@ -27,20 +27,16 @@
   },
   "homepage": "https://github.com/ezolla/linear-app-discord#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "const": "^1.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6",
+    "node-fetch": "^2.6.1",
     "util": "^0.12.3",
     "webhook-discord": "^3.7.4"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.7",
-    "@types/request": "^2.48.5",
-    "@types/request-promise": "^4.1.46",
+    "@types/node-fetch": "^2.5.7",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   }
